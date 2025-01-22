@@ -19,10 +19,10 @@ export function createPlaneWithParticles(
   planeSize,
   planeColor,
   emissionBrightness = .6,
-  textureLoader = sharedTextureLoader // Default to shared loader
+  textureLoader = sharedTextureLoader, // Default to shared loader
 ) {
   const group = new THREE.Group();
-
+//  console.log(nodeDetails)
   // Generate a random scale factor for the node
   const randomScale = THREE.MathUtils.randFloat(0.5, 2.0); // Random scale between 0.5 and 2.0
 
