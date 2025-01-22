@@ -91,7 +91,7 @@ export function createPlaneWithParticles(
   const sphereRadius = (planeSize / 2) * randomScale;
 
   // Particles in a sphere
-  const particleCount = 500; // Adjust particle count as needed
+  const particleCount = 200; // Adjust particle count as needed
   const particleGeometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
   const sizes = new Float32Array(particleCount);

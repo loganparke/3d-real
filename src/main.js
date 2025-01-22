@@ -79,26 +79,61 @@ const Graph = ForceGraph3D()(document.getElementById('graph-container'))
     const lowDetail = new THREE.Mesh(lowDetailGeometry, lowDetailMaterial);
     lod.addLevel(lowDetail, 5000); // Low detail at distance 1401
 
+      // Add an invisible larger sphere for easier clicking
+  const clickAreaGeometry = new THREE.SphereGeometry(15, 16, 16); // Larger geometry
+  const clickAreaMaterial = new THREE.MeshBasicMaterial({ visible: false }); // Invisible
+  const clickArea = new THREE.Mesh(clickAreaGeometry, clickAreaMaterial);
+  clickArea.userData = { nodeId: node.id }; // Attach data for identification
+  lod.addLevel(clickArea, 10000); // Use the largest level for interaction
+
     return lod;
   })
   .linkWidth(2)
   .linkColor('#aaa')
   .onNodeClick(function(node) {
-    console.log(node)
-    // Aim at node from outside it
-    var distance = 40;
-    var distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+    console.log(node);
 
-    var newPos = (node.x || node.y || node.z)
-        ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
-        : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
+    var sideOffset = 200; // Controls how far the camera is from the node on the X-axis
+    var distance = 150;   // Controls the zoom level or distance from the node
+    
+    // Calculate a fixed offset position relative to the node
+    var newPos = {
+        x: node.x + sideOffset, // Place the camera to the side of the node
+        y: node.y,              // Align vertically with the node
+        z: node.z               // Maintain depth alignment
+    };
 
+    // Adjust the lookAt target to focus directly on the selected node
+    var lookAtPos = {
+        x: node.x, // Focus on the node's position
+        y: node.y,
+        z: node.z
+    };
+
+    // Reset the camera position and lookAt target with every click
     Graph.cameraPosition(
-        newPos, // new position
-        node,   // lookAt ({ x, y, z })
-        3000    // ms transition duration
+        newPos,      // Camera position (to the side of the node)
+        lookAtPos,   // LookAt target (focus on the node itself)
+        3000         // Transition duration in ms
     );
 });
+
+//   .onNodeClick(function(node) {
+//     console.log(node)
+//     // Aim at node from outside it
+//     var distance = 150;
+//     var distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+//     var newPos = (node.x || node.y || node.z)
+//         ? { x: node.x * distRatio + 200, y: node.y * distRatio, z: node.z * distRatio }
+//         : { x: 200, y: 0, z: distance }; // special case if node is in (0,0,0)
+
+//     Graph.cameraPosition(
+//         newPos, // new position
+//         node,   // lookAt ({ x, y, z })
+//         3000    // ms transition duration
+//     );
+// });
 
 // Configure camera controls
 const controls = Graph.controls();
@@ -107,6 +142,10 @@ controls.zoomSpeed = 0.5;
 controls.enableDamping = true; 
 controls.dampingFactor = 2.5; 
 controls.screenSpacePanning = true; 
+controls.panSpeed = .8;
+controls.zoomSpeed = 1.2; // Adjust to balance zooming speed
+controls.minDistance = 50; // Prevent zooming too close
+controls.maxDistance = 2000; // Prevent zooming too far
 
 // Adjust the link distance
 Graph.d3Force('link').distance(200);
@@ -230,3 +269,4 @@ function animate() {
   composer.render();
 }
 animate();
+
