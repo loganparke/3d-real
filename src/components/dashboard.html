@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Import the CSS file -->
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+<div class="dashboard_wrap">
+<div class="dashboard_contain">
+<section class="communities">
+  <h2>Matching Communites</h2>
+  <article class="com_card">
+    <img src="https://cdn.funnelbot.ai/5686c6fd406398e4b453fd95f3494081.png" />
+    <h3>Outdoor Enthusiasts</h3>
+    <div class="heat_bar"></div>
+  </article>
+  <article class="com_card">
+    <img src="https://cdn.funnelbot.ai/5686c6fd406398e4b453fd95f3494081.png" />
+    <h3>Outdoor Enthusiasts</h3>
+    <div class="heat_bar"></div>
+  </article>
+  <article class="com_card">
+    <img src="https://cdn.funnelbot.ai/5686c6fd406398e4b453fd95f3494081.png" />
+    <h3>Outdoor Enthusiasts</h3>
+    <div class="heat_bar"></div>
+  </article>
+  <article class="com_card">
+    <img src="https://cdn.funnelbot.ai/5686c6fd406398e4b453fd95f3494081.png" />
+    <h3>Outdoor Enthusiasts</h3>
+    <div class="heat_bar"></div>
+  </article>
+</section>
+</div>
+</div>
+</body>
+<style>
+  .dashboard_wrap{
+    display: none;
+  position: relative;
+  width: 350px;
+  margin-left: auto;
+}
+.dashboard_contain{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+}
+.communities{
+  background: #00031B;
+  width: 275px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.communities h2{
+  width: 250px;
+  color: white;
+}
+.com_card{
+  background: #1A1C32;
+  border: 1px solid white;
+  border-radius: 8px;
+  width: 210px;
+  height: 210px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.com_card img{
+  width: 65%;
+  display: block;
+  margin: auto;
+}
+.com_card h3{
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.heat_bar{
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to right, red, yellow);
+  margin: auto;
+  border-radius: 4px;
+}
+.communities::-webkit-scrollbar {
+  width: 8px;
+}
+
+.communities::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: transparent;;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+.communities::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #858585;
+}
+</style>

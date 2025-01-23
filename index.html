@@ -19,6 +19,28 @@
       width: 100%;
       height: 100%; /* Make it cover the full viewport */
     }
+    .graph-tooltip {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid rgba(149, 149, 149, 0.556);
+      /* font-family: Arial, sans-serif; */
+      /* font-size: 12px; */
+      line-height: 1.4;
+      position: absolute; /* Allow dynamic positioning */
+      left: -30px;
+      z-index: 10;
+      pointer-events: none; /* Prevent tooltip from blocking mouse interactions */
+      min-width: 100px;
+      max-width: 400px; /* Optional: Limit tooltip width */
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Limit to 2 lines */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
   </style>
 </head>
 <body>

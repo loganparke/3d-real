@@ -59,6 +59,7 @@ const { nodes, links } = transformData(data);
 // Create the 3D force graph using the transformed data
 const Graph = ForceGraph3D()(document.getElementById('graph-container'))
   .graphData({ nodes, links })
+  .nodeLabel(node => `<div class="graph-tooltip">${node.name}</div>`)
   .nodeThreeObject(node => {
     const lod = new THREE.LOD();
 
