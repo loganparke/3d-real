@@ -18,6 +18,7 @@ export function createPlaneWithParticles(
   modelPath,
   planeSize,
   planeColor,
+  node,
   emissionBrightness = .6,
   textureLoader = sharedTextureLoader, // Default to shared loader
 ) {
@@ -43,9 +44,30 @@ export function createPlaneWithParticles(
     new THREE.Color(0xEF4444), // Red
     new THREE.Color(0xFF7700)  // Orange
   ];
-
+  function chooseColor (tier) {
+    switch(tier){
+      case 'Tier_1':
+          return new THREE.Color(0xffffff);
+          break;
+        case 'Tier_2':
+          return new THREE.Color(0x5AB7FA);
+          break;
+        case 'Tier_3':
+          return new THREE.Color(0xEF4444);
+          break;
+        case 'Tier_4':
+          return new THREE.Color(0xFF7700);
+          break;
+        default:
+          return new THREE.Color(0xFF7700);
+          break;
+    }
+  }
+    // console.log('node', node.label)
+    let tier = node.label
   // Select one emissive color randomly from the four
-  const selectedEmissiveColor = emissiveColors[Math.floor(Math.random() * emissiveColors.length)];
+  const selectedEmissiveColor = chooseColor(tier);
+  // const selectedEmissiveColor = emissiveColors[Math.floor(Math.random() * emissiveColors.length)];
 
   // Plane Material with static brightness
   const planeMaterial = new THREE.ShaderMaterial({
@@ -81,6 +103,7 @@ export function createPlaneWithParticles(
     depthWrite: false,
   });
 
+  
   // Plane Geometry
   const planeGeometry = new THREE.PlaneGeometry(planeSize, planeSize);
   const plane = new THREE.Mesh(planeGeometry, planeMaterial);

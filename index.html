@@ -44,6 +44,23 @@
   </style>
 </head>
 <body>
+  <div id="dashboard-container"></div>
+  <script>
+  fetch('./src/components/dashboard.html')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to load dashboard.html');
+    }
+    return response.text();
+  })
+  .then(data => {
+    // console.log(data)
+    document.getElementById('dashboard-container').innerHTML = data;
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+</script>
   <div id="graph-container"></div>
   <script type="module" src="./src/main.js"></script>
 </body>

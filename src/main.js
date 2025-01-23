@@ -64,7 +64,7 @@ const Graph = ForceGraph3D()(document.getElementById('graph-container'))
     const lod = new THREE.LOD();
 
     // Add detailed geometry (e.g., plane with particles)
-    const highDetail = createPlaneWithParticles('./static/starmodels3.glb', 30, 0xffffff);
+    const highDetail = createPlaneWithParticles('./static/starmodels3.glb', 30, 0xffffff, node);
     highDetail.userData.nodeId = node.id;
     lod.addLevel(highDetail, 500); // Full detail at distance 0
 
@@ -119,22 +119,6 @@ const Graph = ForceGraph3D()(document.getElementById('graph-container'))
     );
 });
 
-//   .onNodeClick(function(node) {
-//     console.log(node)
-//     // Aim at node from outside it
-//     var distance = 150;
-//     var distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
-
-//     var newPos = (node.x || node.y || node.z)
-//         ? { x: node.x * distRatio + 200, y: node.y * distRatio, z: node.z * distRatio }
-//         : { x: 200, y: 0, z: distance }; // special case if node is in (0,0,0)
-
-//     Graph.cameraPosition(
-//         newPos, // new position
-//         node,   // lookAt ({ x, y, z })
-//         3000    // ms transition duration
-//     );
-// });
 
 // Configure camera controls
 const controls = Graph.controls();
@@ -146,7 +130,7 @@ controls.screenSpacePanning = true;
 controls.panSpeed = .8;
 controls.zoomSpeed = 1.2; // Adjust to balance zooming speed
 controls.minDistance = 50; // Prevent zooming too close
-controls.maxDistance = 2000; // Prevent zooming too far
+controls.maxDistance = 3000; // Prevent zooming too far
 
 // Adjust the link distance
 Graph.d3Force('link').distance(200);
@@ -270,4 +254,3 @@ function animate() {
   composer.render();
 }
 animate();
-
