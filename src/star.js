@@ -44,8 +44,30 @@ export function createPlaneWithParticles(
     new THREE.Color(0xEF4444), // Red
     new THREE.Color(0xFF7700)  // Orange
   ];
-  function chooseColor (tier) {
-    switch(tier){
+  function chooseColor (node) {
+// console.log(typeof node.id)
+//     switch(node.id){
+//       case node.id < 2000:
+//         console.log('2000')
+//           return new THREE.Color(0xffffff);
+//           break;
+//         case node.id < 3000:
+//           console.log('3000')
+//           return new THREE.Color(0xFF7700);
+//           break;
+//         case node.id < 4000:
+//           console.log('4000')
+//           return new THREE.Color(0xEF4444);
+//           break;
+//         case node.id < 5000:
+//           console.log('5000')
+//           return new THREE.Color(0xFF7700);
+//           break;
+//         default:
+//           return new THREE.Color(0xFF7700);
+//           break;
+//     }
+    switch(node.label){
       case 'Tier_1':
           return new THREE.Color(0xffffff);
           break;
@@ -63,10 +85,11 @@ export function createPlaneWithParticles(
           break;
     }
   }
-    // console.log('node', node.label)
+
+  // console.log('node', node)
     let tier = node.label
   // Select one emissive color randomly from the four
-  const selectedEmissiveColor = chooseColor(tier);
+  const selectedEmissiveColor = chooseColor(node);
   // const selectedEmissiveColor = emissiveColors[Math.floor(Math.random() * emissiveColors.length)];
 
   // Plane Material with static brightness
